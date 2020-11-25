@@ -12,4 +12,8 @@ export class Tab1Page {
   click() {
     this.router.navigateByUrl("onboarding");
   }
+
+  loginPage() {
+    this.router.navigateByUrl("login");
+  }
 }

@@ -13,14 +13,14 @@ export class OnboardingPage {
   ionViewDidEnter() {
     this.storage.get("didOnboarding").then((result) => {
       if (result.didOnboarding) {
-        this.router.navigateByUrl("");
+        this.router.navigateByUrl("login");
       }
     });
   }
 
   updateOnboarding() {
     this.storage.set("didOnboarding", { didOnboarding: true }).then(() => {
-      this.router.navigateByUrl("");
+      this.router.navigateByUrl("login");
     });
   }
 }
