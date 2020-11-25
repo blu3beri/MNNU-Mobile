@@ -1,5 +1,4 @@
 import { Component } from "@angular/core";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
 
 @Component({
   selector: "app-tab1",
