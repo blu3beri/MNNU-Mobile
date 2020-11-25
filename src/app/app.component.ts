@@ -2,7 +2,8 @@ import { Component, OnInit } from "@angular/core";
 
 import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { Plugins } from "@capacitor/core";
+import { Colors } from "src/app/constants/colors";
 
 const { StatusBar } = Plugins;
 
@@ -24,12 +25,6 @@ export class AppComponent {
   }
 
   setStatusBar() {
-    StatusBar.setStyle({
-      style: StatusBarStyle.Light,
-    });
-
-    StatusBar.setOverlaysWebView({
-      overlay: true,
-    });
+    StatusBar.setBackgroundColor({ color: Colors.backgroundColor });
   }
 }
