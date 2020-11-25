@@ -1,9 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
-import { Plugins } from "@capacitor/core";
-import { Colors } from "src/app/constants/colors";
+import { OnboardingPage } from "./onboarding/onboarding.page";
+import { Router } from "@angular/router";
+import { StorageService } from "./services/storage.service";
+import { Plugins, StatusBarStyle } from "@capacitor/core";
 
 const { StatusBar } = Plugins;
 
@@ -13,18 +15,36 @@ const { StatusBar } = Plugins;
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
-  constructor(private platform: Platform, private splashScreen: SplashScreen) {
+  rootPage: any = OnboardingPage;
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+    private storage: StorageService,
+    private router: Router
+  ) {
     this.initializeApp();
-    this.setStatusBar();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.splashScreen.hide();
+      this.setStatusBar();
+      this.pushToAppOnboarding();
+    });
+  }
+
+  async pushToAppOnboarding() {
+    this.storage.get("didOnboarding").then((result) => {
+      if (result && result.didOnboarding) {
+        this.router.navigateByUrl("");
+      } else {
+        this.router.navigateByUrl("onboarding");
+      }
     });
   }
 
   setStatusBar() {
-    StatusBar.setBackgroundColor({ color: Colors.backgroundColor });
+    StatusBar.setBackgroundColor({ color: "white" });
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
   }
 }

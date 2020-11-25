@@ -1,0 +1,24 @@
+.slides {
+  height: 100%;
+}
+
+.slide {
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+}
+
+.slide-title {
+  width: 80%;
+  font-weight: 500;
+}
+
+.slide-image {
+  width: 80%;
+}
+
+.slide-button {
+  margin-top: 10vh;
+  font-weight: bold;
+  color: white;
+}
