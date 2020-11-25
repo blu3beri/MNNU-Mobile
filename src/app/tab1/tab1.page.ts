@@ -1,6 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { StorageService } from "../services/storage.service";
 
 @Component({
   selector: "app-tab1",
@@ -8,8 +7,7 @@ import { StorageService } from "../services/storage.service";
   styleUrls: ["tab1.page.scss"],
 })
 export class Tab1Page {
-  result: any;
-  constructor(private router: Router, private storage: StorageService) {}
+  constructor(private router: Router) {}
 
   click() {
     this.router.navigateByUrl("onboarding");
