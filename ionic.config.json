@@ -1,0 +1,7 @@
+{
+  "name": "MNNU-Mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
