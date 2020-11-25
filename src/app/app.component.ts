@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { Platform } from "@ionic/angular";
 import { SplashScreen } from "@ionic-native/splash-screen/ngx";
@@ -14,14 +14,22 @@ const { StatusBar } = Plugins;
 export class AppComponent {
   constructor(private platform: Platform, private splashScreen: SplashScreen) {
     this.initializeApp();
+    this.setStatusBar();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.splashScreen.hide();
-      StatusBar.setBackgroundColor({ color: StatusBarStyle.Light });
     });
   }
 
-  setStatusBar() {}
+  setStatusBar() {
+    StatusBar.setStyle({
+      style: StatusBarStyle.Light,
+    });
+
+    StatusBar.setOverlaysWebView({
+      overlay: true,
+    });
+  }
 }
