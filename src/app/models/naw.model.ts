@@ -5,8 +5,8 @@ export interface Naw {
   geslacht: Geslacht;
   geboortedatum: string | Date;
   burgerservicenummer: number;
-  geldigheidIdentiteitskaart: boolean;
-  burgerlijkeStaat: BurgerlijkeStaat;
+  geldigheid_identiteitskaart: boolean;
+  burgerlijke_staat: BurgerlijkeStaat;
   telefoonummer: string;
 }
 

@@ -18,8 +18,8 @@ export class Tab1Page {
       geslacht: Geslacht.man,
       geboortedatum: "01-01-1968",
       burgerservicenummer: 12345678,
-      geldigheidIdentiteitskaart: true,
-      burgerlijkeStaat: BurgerlijkeStaat.gehuwd,
+      geldigheid_identiteitskaart: true,
+      burgerlijke_staat: BurgerlijkeStaat.gehuwd,
       telefoonummer: "+31 6 12 34 56 78",
     };
   }

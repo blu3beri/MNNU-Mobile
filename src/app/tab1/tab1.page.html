@@ -12,7 +12,7 @@
         <ion-item *ngFor="let item of naw | keyvalue: originalOrder">
           <ion-grid>
             <ion-row>
-              <ion-col><p>{{item.key}}</p></ion-col>
+              <ion-col><p>{{item.key.replace('_', ' ')}}</p></ion-col>
               <ion-col *ngIf="item.value !== true && item.value !== false">
                 <p style="text-align: right">{{item.value}}</p>
               </ion-col>
