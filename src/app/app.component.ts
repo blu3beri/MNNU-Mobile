@@ -36,6 +36,7 @@ export class AppComponent {
   async pushToAppOnboarding() {
     this.storage.get("didOnboarding").then((result) => {
       if (result && result.didOnboarding) {
+        // GOTO LOGIN IF U NEED PINCODE OR NO QRCODE IS SCANNED (STORE IN STORAGE IF IT HAS BEEN SCANNED)
         // this.router.navigateByUrl("login");
         this.router.navigateByUrl("");
       } else {
