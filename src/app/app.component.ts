@@ -36,7 +36,8 @@ export class AppComponent {
   async pushToAppOnboarding() {
     this.storage.get("didOnboarding").then((result) => {
       if (result && result.didOnboarding) {
-        this.router.navigateByUrl("login");
+        // this.router.navigateByUrl("login");
+        this.router.navigateByUrl("");
       } else {
         this.router.navigateByUrl("onboarding");
       }

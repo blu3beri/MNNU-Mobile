@@ -1,4 +1,30 @@
 <ion-content>
-  <ion-button (click)="click()">click!</ion-button>
-  <ion-button (click)="loginPage()">click!</ion-button>
+  <div class="wrapper">
+    <div class="header">
+      <h1 class="header-title">Hallo, {{naw.naam}}</h1>
+    </div>
+    <div class="naw-data">
+      <ion-text color="primary" class="title-wrapper">
+        <h2>Uw gegevens</h2>
+        <ion-button fill="none"><ion-icon name="create"></ion-icon></ion-button>
+      </ion-text>
+      <ion-list lines="none">
+        <ion-item *ngFor="let item of naw | keyvalue: originalOrder">
+          <ion-grid>
+            <ion-row>
+              <ion-col><p>{{item.key}}</p></ion-col>
+              <ion-col *ngIf="item.value !== true && item.value !== false">
+                <p style="text-align: right">{{item.value}}</p>
+              </ion-col>
+              <ion-col *ngIf="item.value === true || item.value === false">
+                <p style="text-align: right">{{item.value ? 'Ja' : 'Nee'}}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>
+
+<!-- MAAK KOLOMMEN VAN DE DATA -->
