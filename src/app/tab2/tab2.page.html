@@ -6,17 +6,17 @@
     <h1>HAHA</h1>
   </mat-expansion-panel>
 </mat-accordion> -->
-<ion-content>
+<!-- <ion-content>
   <div class="wrapper">
     <div class="naw-data">
       <ion-text color="primary" class="title-wrapper">
-        <h2>Electronisch patiënten dossier</h2>
+        <h2>Uw medische gegevens</h2>
       </ion-text>
       <ion-list lines="none">
         <ion-item *ngFor="let item of epd | keyvalue: originalOrder">
           <ion-grid>
             <ion-row>
-              <ion-col *ngIf="!objectCheck(item.value)"><b>{{item.key.replace('_', ' ')}}</b></ion-col>
+              <ion-col *ngIf="!objectCheck(item.value)"><b>{{item.key.replaceAll('_', ' ')}}</b></ion-col>
               <ion-col *ngIf="(item.value !== true && item.value !== false) && !objectCheck(item.value)">
                 <p style="text-align: right">{{item.value}}</p>
               </ion-col>
@@ -34,7 +34,7 @@
                     <ion-item *ngFor="let n of item.value | keyvalue" class="no-padding">
                       <ion-grid>
                         <ion-row>
-                          <ion-col><b>{{n.key.replace('_', ' ')}}</b></ion-col>
+                          <ion-col><b>{{n.key.replaceAll('_', ' ')}}</b></ion-col>
                           <ion-col style="text-align: right">{{n.value}}</ion-col>
                         </ion-row>
                       </ion-grid>
@@ -46,6 +46,50 @@
           </ion-grid>
         </ion-item>
       </ion-list>
+    </div>
+  </div>
+</ion-content> -->
+
+<ion-content>
+  <div class="wrapper">
+    <div class="naw-data">
+      <ion-text color="primary" class="title-wrapper">
+        <h2>Uw medische gegevens</h2>
+        <ion-item class="search-bar" lines="none">
+          <ion-input
+            type="text"
+            placeholder="Zoeken..."
+            [(ngModel)]="query"
+            (ngModelChange)="searchEpd()"
+            clearInput="true"
+          ></ion-input>
+        </ion-item>
+      </ion-text>
+      <mat-accordion multi>
+        <mat-expansion-panel *ngFor="let item of epd | keyvalue: originalOrder" class="mat-elevation-z0 no-padding">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b>{{item.key.replaceAll('_', ' ') | capitalize}}</b>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div *ngIf="objectCheck(item.value)">
+            <ion-item *ngFor="let n of item.value | keyvalue" class="no-padding" lines="none">
+              <ion-grid>
+                <ion-row>
+                  <ion-col><b>{{n.key.replaceAll('_', ' ') | capitalize}}</b></ion-col>
+                  <ion-col style="text-align: right">{{n.value | capitalize}}</ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+          </div>
+          <div *ngIf="!objectCheck(item.value)">
+            <ion-item class="no-padding" lines="none">
+              <p *ngIf="item.value === true || item.value === false">{{item.value ? 'Ja' : 'Nee'}}</p>
+              <p *ngIf="item.value !== true && item.value !== false">{{item.value | capitalize}}</p>
+            </ion-item>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   </div>
 </ion-content>

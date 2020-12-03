@@ -1,22 +1,89 @@
 export interface Epd {
-  hulpvraag: string;
-  huisarts: string;
-  logoPrimary?: LogoPrimary;
-  ergoPrimary?: ErgoPrimary;
-  fysioPrimary?: FysioPrimary;
+  hulpvraag?: string;
+  huisarts?: string;
+  screening?: string;
+  rapportageformulier?: string;
+  logopedist?: primary;
+  ergotherapeut?: primary;
+  fysiotherapeut?: primary;
+  indicatie?: string;
+  resultaat?: string;
+  toestemming_HA?: boolean;
+  functioneringsproblemen?: string;
+  duur?: string;
+  beloop?: string;
+  medische_gezondheidsdeterminanten?: string;
+  verwachting_client?: string;
+  meetinstrument?: string;
+  huidig_functioneren?: string;
+  datum_sessie?: string;
+  naam_behandelend_specialist?: string;
+  beloop_functioneren?: string;
+  uitgevoerde_verrichtingen?: string;
+  evaluatie_specialist?: string;
+  plan_voor_volgende_sessie?: string;
+  datum_eindevaluatie?: string;
+  realisatie_behandeldoel?: string;
+  datum_afsluiting?: string;
+  reden_einde_zorg?: string;
+  doorverwijzing?: Doorverwijzing;
+  Omgevingsdeterminanten?: string;
+  persoonlijke_determinanten?: string;
+  datum_screening?: string;
+  toelichting_screening?: string;
+  afwijkende_symptonen?: string;
+  advies_vervolg?: string;
+  adres_behandelend_specialist?: string;
+  invloedsfactoren_volgens_client?: string;
+  medische_geschiedenis?: string;
+  aanvullende_medische_gegevens_client?: string;
+  resultaat_van_overleg_met_ha?: string;
+  aanvraag_voor_nadere_diagnostiek?: string;
+  beleid_verwijzer_tot_nu_toe?: string;
+  reden_voor_opname?: string;
+  hulpvraag_van_clientsysteem?: string;
+  verwachtingen_van_clientsysteem?: string;
+  medicatie?: string;
+  mening_client_over_gezondheidstoestand?: string;
+  privesituatie?: string;
+  werk_en_opleiding?: string;
+  gebruikte_hulpmiddelen?: string;
+  persoonlijke_achtergrond?: string;
+  leefstijl?: string;
+  fysieke_en_mentale_belastbaarheid?: string;
+  aanwezige_voorzieningen?: string;
+  ontslagbestemming?: string;
+  multidisciplinair_doel?: string;
+  geplande_verrichtingen?: string;
+  verwacht_aantal_sessies?: string;
+  gepland_evaluatiemoment?: string;
+  bijstelling_diagnose?: string;
+  bijstelling_behandelplan?: string;
+  overleggegevens?: string;
+  tussenresultaat?: string;
+  datum_tussenverslag?: string;
+  afwijking_verwacht_behandelbeloop?: string;
+  oordeel_vover_samenwerking_en_behandelproces?: string;
+  nazorg_of_afspraken?: string;
+  datum_verslaggeving_verwijzer?: string;
+  datum_clienttevredenheidsonderzoek?: string;
 }
 
-export interface LogoPrimary {
-  hulpvraag: string;
-  meetinstrument: string;
+export interface primary {
+  diagnostisch_onderzoek?: string;
+  hulpvraag?: string;
+  meetinstrument?: string;
+  diagnose?: string;
+  indicatie?: string;
+  hoofddoel?: string;
 }
 
-export interface ErgoPrimary {
-  hulpvraag: string;
-  meetinstrument: string;
-}
-
-export interface FysioPrimary {
-  hulpvraag: string;
-  meetinstrument: string;
+export interface Doorverwijzing {
+  datum?: string;
+  naam?: string;
+  adres?: string;
+  diagnose?: string;
+  hulpvraag?: string;
+  specialisme?: string;
+  UID?: string;
 }

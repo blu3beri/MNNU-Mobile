@@ -10,14 +10,24 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { HttpClientModule } from "@angular/common/http";
 
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { CapitalizePipe } from "./pipes/capitalize.pipe";
+import { PipeModule } from "./pipes/pipes.module";
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, BrowserAnimationsModule],
-  providers: [StatusBar, SplashScreen, BarcodeScanner,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    PipeModule.forRoot(),
+  ],
+  providers: [StatusBar, SplashScreen, BarcodeScanner, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  exports: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
