@@ -23,21 +23,6 @@
           </ion-grid>
         </ion-item>
       </ion-list>
-      <ion-list lines="none">
-        <ion-item *ngFor="let item of naw | keyvalue: originalOrder">
-          <ion-grid>
-            <ion-row>
-              <ion-col><p>{{item.key.replace('_', ' ')}}</p></ion-col>
-              <ion-col *ngIf="item.value !== true && item.value !== false">
-                <p style="text-align: right">{{item.value}}</p>
-              </ion-col>
-              <ion-col *ngIf="item.value === true || item.value === false">
-                <p style="text-align: right">{{item.value ? 'Ja' : 'Nee'}}</p>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-      </ion-list>
     </div>
   </div>
 </ion-content>
