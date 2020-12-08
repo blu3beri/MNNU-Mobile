@@ -1,7 +1,7 @@
 import { KeyValue } from "@angular/common";
-import { Component, KeyValueDiffers, OnInit } from "@angular/core";
-import { ɵNgNoValidate } from "@angular/forms";
+import { Component, OnInit } from "@angular/core";
 import { Epd } from "../models/epd.model";
+import { WebsocketHandlerService } from "../services/websocket-handler.service";
 
 @Component({
   selector: "app-tab2",
@@ -13,7 +13,7 @@ export class Tab2Page implements OnInit {
   backupEpd: Epd;
   query: string;
 
-  constructor() {
+  constructor(private wsh: WebsocketHandlerService) {
     this.epd = {
       huisarts: "pariatur",
       screening: "in reprehenderit eius",

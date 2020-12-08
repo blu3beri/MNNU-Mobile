@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
-import { Router } from '@angular/router';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
-import { Invite } from '../models/invite.model';
+import { Router } from "@angular/router";
+import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
+import { Invite } from "../models/invite.model";
+import { WebsocketHandlerService } from "../services/websocket-handler.service";
 
 @Component({
   selector: "app-login",
@@ -11,19 +12,22 @@ import { Invite } from '../models/invite.model';
 export class LoginPage {
   invite: Invite;
 
-  constructor(private barcodeScanner: BarcodeScanner, private router: Router) {}
+  constructor(private barcodeScanner: BarcodeScanner, private router: Router, private wsh: WebsocketHandlerService) {}
 
   scan() {
-    this.barcodeScanner.scan({disableSuccessBeep: true, prompt: "Scan de qrcode die u heeft ontvangen"}).then(barcodeData => {
-      this.invite = JSON.parse(atob(barcodeData.text));
-      if(this.invite && this.invite.label) {
-        this.router.navigateByUrl('');
-      }
-    }).catch(error => console.error(error)
-    )
+    this.barcodeScanner
+      .scan({ disableSuccessBeep: true, prompt: "Scan de qrcode die u heeft ontvangen" })
+      .then((barcodeData) => {
+        this.invite = JSON.parse(atob(barcodeData.text));
+        // TODO: FIX CHECK
+        if (this.invite && this.invite.label) {
+          this.router.navigateByUrl("");
+        }
+      })
+      .catch((error) => console.error(error));
   }
 
   skip() {
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl("");
   }
 }

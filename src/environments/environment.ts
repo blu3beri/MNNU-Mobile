@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  websocket: {
+    key: "31cc1150-0a7e-42f2-a854-c681802b28cf",
+    url: "ws://0.0.0.0:8080/ws",
+  },
 };
 
 /*
