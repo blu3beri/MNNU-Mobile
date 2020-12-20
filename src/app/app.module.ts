@@ -14,10 +14,6 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { PipeModule } from "./pipes/pipes.module";
 
-// import { SocketIoModule, SocketIoConfig } from "ngx-socket-io";
-import { environment } from "src/environments/environment";
-// const config: SocketIoConfig = { url: environment.websocket.url, options: {} };
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -28,7 +24,6 @@ import { environment } from "src/environments/environment";
     HttpClientModule,
     BrowserAnimationsModule,
     PipeModule.forRoot(),
-    // SocketIoModule.forRoot(config),
   ],
   providers: [StatusBar, SplashScreen, BarcodeScanner, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   exports: [],

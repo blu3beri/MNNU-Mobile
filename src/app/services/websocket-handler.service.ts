@@ -1,12 +1,13 @@
-import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { webSocket } from "rxjs/webSocket";
+import { webSocket, WebSocketSubject } from "rxjs/webSocket";
+import { Injectable } from "@angular/core";
+import { WsResponse } from "../models/wsResponse.model";
 
 @Injectable({
   providedIn: "root",
 })
 export class WebsocketHandlerService {
-  public subject = webSocket(environment.websocket.url);
+  public subject: WebSocketSubject<any> = webSocket(environment.websocket.url);
 
   constructor() {
     this.handshake();

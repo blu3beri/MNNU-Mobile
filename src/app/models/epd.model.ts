@@ -3,9 +3,9 @@ export interface Epd {
   huisarts?: string;
   screening?: string;
   rapportageformulier?: string;
-  logopedist?: primary;
-  ergotherapeut?: primary;
-  fysiotherapeut?: primary;
+  logopedist?: Primary;
+  ergotherapeut?: Primary;
+  fysiotherapeut?: Primary;
   indicatie?: string;
   resultaat?: string;
   toestemming_HA?: boolean;
@@ -69,7 +69,7 @@ export interface Epd {
   datum_clienttevredenheidsonderzoek?: string;
 }
 
-export interface primary {
+export interface Primary {
   diagnostisch_onderzoek?: string;
   hulpvraag?: string;
   meetinstrument?: string;

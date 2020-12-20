@@ -10,6 +10,7 @@ import { BurgerlijkeStaat, Geslacht, Naw } from "../models/naw.model";
 })
 export class Tab1Page {
   naw: Naw;
+
   constructor(private router: Router) {
     this.naw = {
       naam: "Jan",

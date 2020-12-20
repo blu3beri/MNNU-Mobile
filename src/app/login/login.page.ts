@@ -12,7 +12,11 @@ import { WebsocketHandlerService } from "../services/websocket-handler.service";
 export class LoginPage {
   invite: Invite;
 
-  constructor(private barcodeScanner: BarcodeScanner, private router: Router, private wsh: WebsocketHandlerService) {}
+  constructor(private barcodeScanner: BarcodeScanner, private router: Router, private wsh: WebsocketHandlerService) {
+    this.wsh.subject.subscribe((x) => {
+      console.log(x);
+    });
+  }
 
   scan() {
     this.barcodeScanner
@@ -21,6 +25,7 @@ export class LoginPage {
         this.invite = JSON.parse(atob(barcodeData.text));
         // TODO: FIX CHECK
         if (this.invite && this.invite.label) {
+          this.wsh.subject.unsubscribe();
           this.router.navigateByUrl("");
         }
       })
