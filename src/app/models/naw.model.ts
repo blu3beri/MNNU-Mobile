@@ -3,9 +3,9 @@ export interface Naw {
   voorletters: string;
   achternaam: string;
   geslacht: Geslacht;
-  geboortedatum: string | Date;
+  geboortedatum: any;
   burgerservicenummer: number;
-  geldigheid_identiteitskaart: boolean;
+  geldigheid_identiteitskaart: string;
   burgerlijke_staat: BurgerlijkeStaat;
   telefoonummer: string;
 }

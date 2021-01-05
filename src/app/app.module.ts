@@ -13,6 +13,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { PipeModule } from "./pipes/pipes.module";
+import { EditPageModule } from "./edit/edit.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { PipeModule } from "./pipes/pipes.module";
     HttpClientModule,
     BrowserAnimationsModule,
     PipeModule.forRoot(),
+    EditPageModule
   ],
   providers: [StatusBar, SplashScreen, BarcodeScanner, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   exports: [],

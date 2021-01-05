@@ -14,6 +14,10 @@ const routes: Routes = [
     path: "onboarding",
     loadChildren: () => import("./onboarding/onboarding.module").then((m) => m.OnboardingPageModule),
   },
+  {
+    path: 'edit',
+    loadChildren: () => import('./edit/edit.module').then( m => m.EditPageModule)
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules, relativeLinkResolution: "legacy" })],

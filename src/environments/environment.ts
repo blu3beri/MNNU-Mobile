@@ -5,11 +5,11 @@
 export const environment = {
   production: false,
   websocket: {
-    key: "31cc1150-0a7e-42f2-a854-c681802b28cf",
+    key: "34785687346537846537846",
     url: "ws://0.0.0.0:8080/ws",
   },
-  // add ngrok generated domain here (or pay like 5$ a month for a subdomain)
-  ngrokDomain: "https://1a29b5c73c56.eu.ngrok.io/",
+  // add ngrok generated domain here (or pay like 5$ a month for a custom subdomain)
+  ngrokDomain: "https://9f9728e5e4fe.eu.ngrok.io/",
 };
 
 /*

@@ -15,8 +15,8 @@
       </ion-text>
       <mat-accordion multi>
         <mat-expansion-panel *ngFor="let item of epd | keyvalue: originalOrder" class="mat-elevation-z0 no-padding">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
+          <mat-expansion-panel-header style="background-color: white; border-radius: 0;">
+            <mat-panel-title style="color: black">
               <b>{{item.key.replaceAll('_', ' ') | capitalize}}</b>
             </mat-panel-title>
           </mat-expansion-panel-header>
@@ -30,7 +30,7 @@
               </ion-grid>
             </ion-item>
           </div>
-          <div *ngIf="!objectCheck(item.value)">
+          <div class="mat-expansion-panel-body" *ngIf="!objectCheck(item.value)">
             <ion-item class="no-padding" lines="none">
               <p *ngIf="item.value === true || item.value === false">{{item.value ? 'Ja' : 'Nee'}}</p>
               <p *ngIf="item.value !== true && item.value !== false">{{item.value | capitalize}}</p>

@@ -1,5 +1,5 @@
 import { KeyValue } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { Credential } from "../models/apiResponse.model";
 import { Epd } from "../models/epd.model";
 import { ApiHandlerService } from "../services/api-handler.service";
@@ -9,6 +9,7 @@ import { WebsocketHandlerService } from "../services/websocket-handler.service";
   selector: "app-tab2",
   templateUrl: "tab2.page.html",
   styleUrls: ["tab2.page.scss"],
+  encapsulation: ViewEncapsulation.None
 })
 export class Tab2Page implements OnInit {
   epd: Epd;
