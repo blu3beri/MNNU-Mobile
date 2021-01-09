@@ -1,13 +1,13 @@
-import { KeyValue } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { BurgerlijkeStaat, Geslacht } from '../models/naw.model';
-import { NotificationService } from '../services/notification.service';
+import { KeyValue } from "@angular/common";
+import { Component, Input } from "@angular/core";
+import { ModalController } from "@ionic/angular";
+import { BurgerlijkeStaat, Geslacht } from "../models/naw.model";
+import { NotificationService } from "../services/notification.service";
 
 @Component({
-  selector: 'app-edit',
-  templateUrl: './edit.page.html',
-  styleUrls: ['./edit.page.scss'],
+  selector: "app-edit",
+  templateUrl: "./edit.page.html",
+  styleUrls: ["./edit.page.scss"],
 })
 export class EditPage {
   @Input() naam: string;
@@ -20,14 +20,19 @@ export class EditPage {
   @Input() burgerlijke_staat: BurgerlijkeStaat;
   @Input() telefoonummer: string;
 
-  constructor(private modalCtrl: ModalController, private notifications: NotificationService) { }
+  constructor(
+    private modalCtrl: ModalController,
+    private notifications: NotificationService
+  ) {}
 
   dismiss() {
-    this.modalCtrl.dismiss({dismissed: true});
-    this.notifications.notify('No changes have been made');
+    this.modalCtrl.dismiss({ dismissed: true });
   }
 
-  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
+  originalOrder = (
+    a: KeyValue<number, string>,
+    b: KeyValue<number, string>
+  ): number => {
     return 0;
   };
 
@@ -41,8 +46,8 @@ export class EditPage {
       burgerservicenummer: this.burgerservicenummer,
       geldigheid_identiteitskaart: this.geldigheid_identiteitskaart,
       burgerlijke_staat: this.burgerlijke_staat,
-      telefoonummer: this.telefoonummer
+      telefoonummer: this.telefoonummer,
     });
-    this.notifications.notify('Changes have been saved!');
+    this.notifications.notify("De veranderingen zijn doorgevoerd!");
   }
 }

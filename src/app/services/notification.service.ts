@@ -11,7 +11,8 @@ export class NotificationService {
   async notify(message: string, duration = 2000) {
     const toast = await this.toastController.create({
       message,
-      duration
+      duration,
+      cssClass: 'toast-wrapper'
     });
     toast.present();
   }

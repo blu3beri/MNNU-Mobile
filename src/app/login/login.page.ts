@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
-import { Invite } from "../models/invite.model";
+import { Invitation } from "../models/invite.model";
 import { WebsocketHandlerService } from "../services/websocket-handler.service";
 
 @Component({
@@ -10,7 +10,7 @@ import { WebsocketHandlerService } from "../services/websocket-handler.service";
   styleUrls: ["./login.page.scss"],
 })
 export class LoginPage {
-  invite: Invite;
+  invite: Invitation;
 
   constructor(private barcodeScanner: BarcodeScanner, private router: Router, private wsh: WebsocketHandlerService) {
     this.wsh.subject.subscribe((x) => {
