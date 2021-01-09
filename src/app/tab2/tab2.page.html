@@ -1,7 +1,7 @@
 <ion-content>
   <div class="wrapper">
     <div class="naw-data">
-      <ion-text color="primary" class="title-wrapper">
+      <ion-text color="primary" class="title-wrapper"  *ngIf="epd">
         <h2>Uw medische gegevens</h2>
         <ion-item class="search-bar" lines="none">
           <ion-input
@@ -13,7 +13,7 @@
           ></ion-input>
         </ion-item>
       </ion-text>
-      <mat-accordion multi>
+      <mat-accordion multi *ngIf="epd">
         <mat-expansion-panel *ngFor="let item of epd | keyvalue: originalOrder" class="mat-elevation-z0 no-padding">
           <mat-expansion-panel-header style="background-color: white; border-radius: 0;">
             <mat-panel-title style="color: black">
@@ -38,6 +38,10 @@
           </div>
         </mat-expansion-panel>
       </mat-accordion>
+      <div class="no-content" *ngIf="!epd">
+        <img src="../../assets/no_data.svg" alt="no-data" class="no-data-image">
+        <h2>U heeft nog geen medische data.</h2>
+      </div>
     </div>
   </div>
 </ion-content>

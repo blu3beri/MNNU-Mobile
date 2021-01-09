@@ -3,6 +3,7 @@ import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import { Credential } from "../models/apiResponse.model";
 import { Epd } from "../models/epd.model";
 import { ApiHandlerService } from "../services/api-handler.service";
+import { NotificationService } from "../services/notification.service";
 import { WebsocketHandlerService } from "../services/websocket-handler.service";
 
 @Component({
@@ -16,7 +17,7 @@ export class Tab2Page implements OnInit {
   backupEpd: Epd;
   query: string;
 
-  constructor(private wsh: WebsocketHandlerService, private ahs: ApiHandlerService) {
+  constructor(private wsh: WebsocketHandlerService, private ahs: ApiHandlerService, private ns: NotificationService) {
     // this.epd = {
     //   huisarts: "pariatur",
     //   screening: "in reprehenderit eius",
@@ -98,8 +99,11 @@ export class Tab2Page implements OnInit {
 
   getCredentials() {
     this.ahs.getCredentials().subscribe((results: Credential[]) => {
+      console.log(results);
+      
       this.epd = results[0].attrs;
-    });
+    }, (error) => this.ns.notify('Something went wrong. Try again')
+    );
   }
 
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {

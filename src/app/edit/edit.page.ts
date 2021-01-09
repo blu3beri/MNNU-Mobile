@@ -2,6 +2,7 @@ import { KeyValue } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { BurgerlijkeStaat, Geslacht } from '../models/naw.model';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-edit',
@@ -19,10 +20,11 @@ export class EditPage {
   @Input() burgerlijke_staat: BurgerlijkeStaat;
   @Input() telefoonummer: string;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private notifications: NotificationService) { }
 
   dismiss() {
-    this.modalCtrl.dismiss({dismissed: true})
+    this.modalCtrl.dismiss({dismissed: true});
+    this.notifications.notify('No changes have been made');
   }
 
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
@@ -30,8 +32,6 @@ export class EditPage {
   };
 
   save() {
-    console.log(this.geboortedatum);
-    
     this.modalCtrl.dismiss({
       naam: this.naam,
       voorletters: this.voorletters,
@@ -43,5 +43,6 @@ export class EditPage {
       burgerlijke_staat: this.burgerlijke_staat,
       telefoonummer: this.telefoonummer
     });
+    this.notifications.notify('Changes have been saved!');
   }
 }
