@@ -10,14 +10,18 @@ import { WebsocketHandlerService } from "../services/websocket-handler.service";
   selector: "app-tab2",
   templateUrl: "tab2.page.html",
   styleUrls: ["tab2.page.scss"],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class Tab2Page implements OnInit {
   epd: Epd;
   backupEpd: Epd;
   query: string;
 
-  constructor(private wsh: WebsocketHandlerService, private ahs: ApiHandlerService, private ns: NotificationService) {
+  constructor(
+    private wsh: WebsocketHandlerService,
+    private ahs: ApiHandlerService,
+    private ns: NotificationService
+  ) {
     // this.epd = {
     //   huisarts: "pariatur",
     //   screening: "in reprehenderit eius",
@@ -41,7 +45,8 @@ export class Tab2Page implements OnInit {
     //   logopedist: {
     //     hulpvraag: "id dolorem minus",
     //     diagnose: "et",
-    //     hoofddoel: "Sunt qui rerum error molestias voluptatibus repellat mollitia corporis voluptas.",
+    //     hoofddoel:
+    //       "Sunt qui rerum error molestias voluptatibus repellat mollitia corporis voluptas.",
     //   },
     //   ergotherapeut: {
     //     diagnostisch_onderzoek:
@@ -64,19 +69,22 @@ export class Tab2Page implements OnInit {
     //   aanvraag_voor_nadere_diagnostiek: "nobis",
     //   beleid_verwijzer_tot_nu_toe:
     //     "Ea dolorem non in distinctio. Est officiis nobis quis provident autem maiores voluptatem. Laboriosam saepe reprehenderit quam aut et commodi.",
-    //   reden_voor_opname: "Velit pariatur quis aut natus perspiciatis. Harum ut sequi et voluptatibus voluptatem.",
+    //   reden_voor_opname:
+    //     "Velit pariatur quis aut natus perspiciatis. Harum ut sequi et voluptatibus voluptatem.",
     //   hulpvraag_van_clientsysteem:
     //     "Omnis qui sed consequatur aut et. Ut cupiditate est id non illum nemo eius. Saepe aspernatur quis tempore corrupti quia. Consequatur quia at voluptates consequuntur facere ut dignissimos officiis quod. Tenetur animi omnis error sequi eum qui est id sapiente. Tenetur est ipsa ut enim iusto consectetur.",
     //   verwachtingen_van_clientsysteem:
     //     "Velit culpa aperiam quo veritatis culpa optio aut. Unde sunt totam. Ullam error quos sit dignissimos.",
     //   medicatie: "Ea minus quisquam non a molestiae odit.",
-    //   mening_client_over_gezondheidstoestand: "Saepe deserunt id quos ut ea fugit.",
+    //   mening_client_over_gezondheidstoestand:
+    //     "Saepe deserunt id quos ut ea fugit.",
     //   werk_en_opleiding:
     //     "Qui earum tenetur libero cupiditate unde cumque aliquid. Occaecati dolore numquam fugiat voluptatem. Et reiciendis praesentium accusamus aliquam non id natus sed saepe.",
     //   persoonlijke_achtergrond:
     //     "Minus qui earum quibusdam voluptatibus debitis rem. Ut voluptas sed quia dicta. Est eaque porro qui voluptatem.",
     //   leefstijl: "minus illo omnis",
-    //   fysieke_en_mentale_belastbaarheid: "Ad doloremque suscipit minima tenetur perferendis ipsum id rerum.",
+    //   fysieke_en_mentale_belastbaarheid:
+    //     "Ad doloremque suscipit minima tenetur perferendis ipsum id rerum.",
     //   aanwezige_voorzieningen: "at accusamus accusamus",
     //   verwacht_aantal_sessies:
     //     "Omnis dolor aut eius et nihil eveniet odio quia voluptas. Quis impedit est iure enim nihil ipsa nemo. Unde aut in quia ducimus laborum voluptas.",
@@ -85,7 +93,8 @@ export class Tab2Page implements OnInit {
     //   bijstelling_behandelplan: "Doloremque placeat ex eveniet aut.",
     //   overleggegevens:
     //     " \rOfficia eveniet eos qui. Voluptas temporibus voluptatem sint. Ipsa id quas omnis ut ipsum expedita nulla. Et culpa magnam tenetur et ad neque.",
-    //   tussenresultaat: "Dolor et dolor explicabo quia asperiores animi distinctio.",
+    //   tussenresultaat:
+    //     "Dolor et dolor explicabo quia asperiores animi distinctio.",
     //   datum_tussenverslag: "nostrum",
     //   afwijking_verwacht_behandelbeloop: "aspernatur",
     //   nazorg_of_afspraken: "non tenetur rerum",
@@ -94,19 +103,23 @@ export class Tab2Page implements OnInit {
   }
 
   ngOnInit() {
-    this.getCredentials();
+    // this.getCredentials();
   }
 
   getCredentials() {
-    this.ahs.getCredentials().subscribe((results: Credential[]) => {
-      console.log(results);
-      
-      this.epd = results[0].attrs;
-    }, (error) => this.ns.notify('Something went wrong. Try again')
-    );
+    // this.ahs.getCredentials().subscribe(
+    //   (results: Credential[]) => {
+    //     console.log(results);
+    //     this.epd = results[0].attrs;
+    //   },
+    //   (error) => this.ns.notify("Something went wrong. Try again")
+    // );
   }
 
-  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
+  originalOrder = (
+    a: KeyValue<number, string>,
+    b: KeyValue<number, string>
+  ): number => {
     return 0;
   };
 
@@ -133,4 +146,6 @@ export class Tab2Page implements OnInit {
       this.epd = { ...this.backupEpd };
     }
   }
+
+  scan() {}
 }

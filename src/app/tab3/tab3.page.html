@@ -1,33 +1,29 @@
-<ion-content *ngIf="connections.length > 0">
+<ion-content>
   <div class="header">
     <h1 class="header-title">Connecties</h1>
+    <ion-button fill="none" (click)="scan()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
   </div>
-  <ion-text color="primary" class="title-wrapper">
-    <h2>Uw Connecties</h2>
+  <ion-text color="primary" class="title-wrapper" *ngIf="activeConnections.length > 0">
+    <h2>Uw Actieve Connecties</h2>
     <ion-button fill="none" (click)="help()">
       <ion-icon name="help-circle-outline"></ion-icon>
     </ion-button>
   </ion-text>
-  <ion-list lines="none">
-    <ion-item-sliding
-      *ngFor="let connection of connections"
-      (click)="showConnection(connection)"
-    >
+  <ion-list lines="none" *ngIf="activeConnections.length > 0">
+    <ion-item-sliding *ngFor="let connection of activeConnections" (click)="showConnection(connection)">
       <ion-item>
         <ion-label>{{connection.their_label}}</ion-label>
       </ion-item>
-      <ion-item-options
-        #slidingItem
-        side="end"
-        (ionSwipe)="removeConnection(connection)"
-      >
-      </ion-item-options>
+      <ion-item-options #slidingItem side="end" (ionSwipe)="removeConnection(connection)"> </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+  {{invite}}
 </ion-content>
-<ion-content *ngIf="connections.length === 0">
+<!-- <ion-content *ngIf="activeConnections.length === 0">
   <div class="no-connections">
     <img src="../../assets/connection.svg" alt="no-connections" />
     <h2>U heeft nog geen connecties</h2>
   </div>
-</ion-content>
+</ion-content> -->

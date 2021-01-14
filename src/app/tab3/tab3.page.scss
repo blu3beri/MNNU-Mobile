@@ -1,9 +1,17 @@
-.header-title {
-  padding-left: 20px;
-  margin-top: 10vh;
-  font-weight: 600;
-  top: 0;
-  position: sticky;
+.header {
+  .header-title {
+    padding-left: 20px;
+    margin-top: 10vh;
+    font-weight: 600;
+    top: 0;
+    position: sticky;
+  }
+
+  ion-button {
+    position: absolute;
+    right: 20px;
+    top: 83px;
+  }
 }
 
 .title-wrapper {

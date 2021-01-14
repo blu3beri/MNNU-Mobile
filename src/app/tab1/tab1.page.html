@@ -1,5 +1,5 @@
 <ion-content>
-  <div class="wrapper" *ngIf="naw.naam">
+  <div class="wrapper" *ngIf="naw">
     <div class="header">
       <h1 class="header-title">Hallo, {{naw.naam}}</h1>
     </div>
@@ -11,24 +11,18 @@
         </ion-button>
       </ion-text>
       <ion-list lines="none">
-        <ion-item *ngFor="let item of naw | keyvalue: originalOrder">
+        <ion-item *ngFor="let item of naw | keyvalue">
           <ion-grid>
             <ion-row>
               <ion-col><p>{{item.key.replace('_', ' ')}}</p></ion-col>
-              <ion-col
-                *ngIf="(item.value !== true && item.value !== false) && !isDate(item.value)"
-              >
+              <ion-col *ngIf="(item.value !== true && item.value !== false) && !isDate(item.value)">
                 <p style="text-align: right">{{item.value}}</p>
               </ion-col>
               <ion-col *ngIf="item.value === true || item.value === false">
                 <p style="text-align: right">{{item.value ? 'Ja' : 'Nee'}}</p>
               </ion-col>
-              <ion-col
-                *ngIf="(item.value !== true && item.value !== false) && isDate(item.value)"
-              >
-                <p style="text-align: right">
-                  {{item.value | date: 'dd MM yyyy'}}
-                </p>
+              <ion-col *ngIf="(item.value !== true && item.value !== false) && isDate(item.value)">
+                <p style="text-align: right">{{item.value | date: 'dd MM yyyy'}}</p>
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -36,7 +30,7 @@
       </ion-list>
     </div>
   </div>
-  <div class="no-content" *ngIf="!naw.naam">
+  <div class="no-content" *ngIf="!naw">
     <img src="../../assets/personal.svg" alt="no-data" />
     <h2>U heeft nog geen gegevens</h2>
     <ion-button (click)="openModal()">Maak aan!</ion-button>
