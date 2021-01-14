@@ -17,7 +17,8 @@ export class Tab1Page {
 
   constructor(private router: Router, private modalController: ModalController, private apiHandler: ApiHandlerService) {
     // this.createSelfConnenction();
-    this.getNawCredential();
+    // this.getNawCredential();
+    this.ghettoFunction();
   }
 
   originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
@@ -160,5 +161,23 @@ export class Tab1Page {
     } else {
       return newNaw as Naw;
     }
+  }
+
+  ghettoFunction() {
+    const haha = [];
+    const xx = {
+      requested_attributes: {},
+      requested_predicates: {},
+      self_attested_attributes: {},
+      trace: false,
+    };
+    for (let i = 1; i <= 36; i++) {
+      const lol = "attribute" + i;
+      xx.requested_attributes[lol] = {
+        cred_id: "7f241900-aae8-4135-af4a-e8ae7c51d959",
+        revealed: true,
+      };
+    }
+    console.log(JSON.stringify(xx));
   }
 }
