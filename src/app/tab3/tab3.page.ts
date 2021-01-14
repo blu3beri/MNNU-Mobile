@@ -102,7 +102,7 @@ export class Tab3Page implements OnInit {
                 this.apiHandler
                   .postReceiveInvitation(invite, "true", invite.label)
                   .then(async () => {
-                    await new Promise((r) => setTimeout(r, 5000));
+                    await new Promise((r) => setTimeout(r, 2000));
                     this.getConnections();
                   })
                   .catch((e) => console.error(e));

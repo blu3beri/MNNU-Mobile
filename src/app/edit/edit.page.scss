@@ -2,17 +2,22 @@
   margin: 20px 0 0 10px;
 }
 
-ion-input{ 
+ion-input {
   text-align: right;
 }
 
-.button-wrapper{
+.button-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 ion-datetime {
   --placeholder-color: black;
+}
+
+col {
+  display: flex;
+  flex-direction: column;
 }

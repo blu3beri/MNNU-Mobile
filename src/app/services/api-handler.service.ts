@@ -82,6 +82,8 @@ export class ApiHandlerService {
   }
 
   postReceiveInvitation(invitation: {}, autoAccept = "true", alias: string): Promise<any> {
+    console.log(invitation);
+
     return this.http
       .post(this.apiUrl + this.endPoints.connections.receiveInvitation, invitation, {
         params: { alias, auto_accept: autoAccept },
@@ -168,6 +170,8 @@ export class ApiHandlerService {
       schema_version: schema.schema.version,
       trace: "false",
     };
+
+    console.log(JSON.stringify(body));
 
     return this.http
       .post(this.apiUrl + this.endPoints.issueCredential.send, body)

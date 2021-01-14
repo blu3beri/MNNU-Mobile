@@ -5,6 +5,6 @@ export const environment = {
     url: "ws://0.0.0.0:8080/ws",
   },
   // add ngrok generated domain here (or pay like 5$ a month for a custom subdomain)
-  ngrokDomain: "https://681efb90a196.eu.ngrok.io",
+  ngrokDomain: "https://65c6e54f938e.eu.ngrok.io",
   userName: "MOBILE_AGENT",
 };

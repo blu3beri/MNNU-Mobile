@@ -5,6 +5,7 @@ import { ModalController } from "@ionic/angular";
 import { EditPage } from "../edit/edit.page";
 import { ApiHandlerService } from "../services/api-handler.service";
 import { naw } from "../models/naw.schema";
+import { Naw } from "../models/naw.model";
 
 @Component({
   selector: "app-tab1",
@@ -12,20 +13,37 @@ import { naw } from "../models/naw.schema";
   styleUrls: ["tab1.page.scss"],
 })
 export class Tab1Page {
-  naw: any;
+  naw: Naw;
 
   constructor(private router: Router, private modalController: ModalController, private apiHandler: ApiHandlerService) {
-    this.createSelfConnenction();
+    // this.createSelfConnenction();
     this.getNawCredential();
   }
 
-  async openModal() {
+  originalOrder = (a: KeyValue<number, string>, b: KeyValue<number, string>): number => {
+    return 0;
+  };
+
+  isObject(val: any): boolean {
+    return typeof val === "object";
+  }
+
+  async openModal(empty = false) {
     // if (this.naw.geboortedatum) {
     //   this.naw.geboortedatum = this.naw.geboortedatum.toISOString();
     // }
+    var x = {};
+    if (empty) {
+      const attributes = [];
+      naw.attributes.forEach((attr) => {
+        attributes[attr] = "";
+      });
+
+      x = this.parseNaw(attributes, false);
+    }
     const modal = await this.modalController.create({
       component: EditPage,
-      componentProps: this.naw,
+      componentProps: { newNaw: empty ? x : this.naw },
     });
     modal.onDidDismiss().then((data) => {
       if (!data.data["dismissed"]) {
@@ -81,13 +99,66 @@ export class Tab1Page {
 
   async sendCredential(credDefId, schema, connectionId, attributes) {
     await this.apiHandler.postCredential(credDefId, schema, connectionId, attributes, "yay");
+    await new Promise((r) => setTimeout(r, 5000));
     this.getNawCredential();
   }
 
   async getNawCredential() {
     const credential = await this.apiHandler.getCredentialByName("naw");
     if (credential && credential.attrs) {
-      this.naw = credential.attrs;
+      this.parseNaw(credential.attrs);
+    }
+  }
+
+  parseNaw(attrs: {}, setNaw = true) {
+    const newNaw = {};
+    const huisarts = {};
+    const mantelzorger = {};
+    const contactpersoon = {};
+    const verzekering = {};
+    const adres = {};
+
+    for (const [key, value] of Object.entries(attrs)) {
+      const split = key.split("_");
+      if (split.length > 1) {
+        if (split[0] === "huisarts") {
+          huisarts[split[1]] = value;
+        } else if (split[0] === "mantelzorger") {
+          mantelzorger[split[1]] = value;
+        } else if (split[0] === "contactpersoon") {
+          contactpersoon[split[1]] = value;
+        } else {
+          newNaw[key] = value;
+        }
+      } else {
+        console.log(key);
+        if (key === "polisnummer" || key === "verzekeraar") {
+          verzekering[key] = value;
+        } else if (
+          key === "straat" ||
+          key === "toevoeging" ||
+          key === "postcode" ||
+          key === "huisnummer" ||
+          key === "woonplaats" ||
+          key === "land" ||
+          key === "provincie"
+        ) {
+          adres[key] = value;
+        } else {
+          newNaw[key] = value;
+        }
+      }
+    }
+
+    newNaw["adres"] = adres;
+    newNaw["verzekering"] = verzekering;
+    newNaw["huisarts"] = huisarts;
+    newNaw["mantelzorger"] = mantelzorger;
+    newNaw["contactpersoon"] = contactpersoon;
+    if (setNaw) {
+      this.naw = newNaw as Naw;
+    } else {
+      return newNaw as Naw;
     }
   }
 }

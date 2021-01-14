@@ -11,8 +11,8 @@
         </ion-button>
       </ion-text>
       <ion-list lines="none">
-        <ion-item *ngFor="let item of naw | keyvalue">
-          <ion-grid>
+        <ion-item *ngFor="let item of naw | keyvalue: originalOrder">
+          <ion-grid *ngIf="!isObject(item.value)">
             <ion-row>
               <ion-col><p>{{item.key.replace('_', ' ')}}</p></ion-col>
               <ion-col *ngIf="(item.value !== true && item.value !== false) && !isDate(item.value)">
@@ -26,6 +26,15 @@
               </ion-col>
             </ion-row>
           </ion-grid>
+          <ion-grid *ngIf="isObject(item.value)">
+            <ion-row>
+              <ion-col class="padding: 10px"><b>{{item.key}}</b></ion-col>
+            </ion-row>
+            <ion-row *ngFor="let sub of item.value | keyvalue: originalOrder">
+              <ion-col style="padding: 10px"><p>{{sub.key}}</p></ion-col>
+              <p style="text-align: right">{{sub.value}}</p>
+            </ion-row>
+          </ion-grid>
         </ion-item>
       </ion-list>
     </div>
@@ -33,6 +42,22 @@
   <div class="no-content" *ngIf="!naw">
     <img src="../../assets/personal.svg" alt="no-data" />
     <h2>U heeft nog geen gegevens</h2>
-    <ion-button (click)="openModal()">Maak aan!</ion-button>
+    <ion-button (click)="openModal(true)">Maak aan!</ion-button>
   </div>
 </ion-content>
+
+<!-- <mat-accordion *ngIf="isObject(item.value)" [displayMode]="flat">
+  <mat-expansion-panel class="mat-elevation-z0">
+    <mat-expansion-panel-header style="background-color: white; border-radius: 0; box-shadow: none">
+      <mat-panel-title style="color: black">{{item.key}}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <ion-item *ngFor="let n of item.value | keyvalue" class="no-padding" lines="none">
+      <ion-grid>
+        <ion-row>
+          <ion-col><b>{{n.key.replaceAll('_', ' ') | capitalize}}</b></ion-col>
+          <ion-col style="text-align: right">{{n.value | capitalize}}</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </mat-expansion-panel>
+</mat-accordion> -->
