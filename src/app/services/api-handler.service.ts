@@ -4,6 +4,7 @@ import { environment } from "src/environments/environment";
 import { map } from "rxjs/operators";
 import { Credential } from "../models/apiResponse.model";
 import { Proof } from "../models/proof.model";
+import { Connection } from "../models/connection.model";
 
 @Injectable({
   providedIn: "root",
@@ -58,18 +59,17 @@ export class ApiHandlerService {
         {},
         options
       )
-      .pipe(map((res: any) => res))
       .toPromise();
   }
 
-  getConnections(): Promise<any> {
+  getConnections(): Promise<Connection[]> {
     return this.http
       .get(this.apiUrl + this.endPoints.connections.connections)
       .pipe(map((res: any) => res.results))
       .toPromise();
   }
 
-  getConnectionById(connectionId: string): Promise<any> {
+  getConnectionById(connectionId: string): Promise<Connection> {
     return this.http
       .get(
         this.apiUrl +
@@ -77,7 +77,7 @@ export class ApiHandlerService {
           "/" +
           connectionId
       )
-      .pipe(map((res: any) => res))
+      .pipe(map((res: Connection) => res))
       .toPromise();
   }
 

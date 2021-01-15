@@ -25,7 +25,7 @@
             <b>{{item.key.replaceAll('_', ' ') | capitalize}}</b>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div *ngIf="objectCheck(item.value)">
+        <div *ngIf="isObject(item.value)">
           <ion-item
             *ngFor="let n of item.value | keyvalue"
             class="no-padding"
@@ -43,7 +43,7 @@
             </ion-grid>
           </ion-item>
         </div>
-        <div class="mat-expansion-panel-body" *ngIf="!objectCheck(item.value)">
+        <div class="mat-expansion-panel-body" *ngIf="!isObject(item.value)">
           <ion-item class="no-padding" lines="none">
             <p *ngIf="item.value === true || item.value === false">
               {{item.value ? 'Ja' : 'Nee'}}

@@ -42,7 +42,7 @@ export class Tab2Page implements OnInit {
     return 0;
   };
 
-  objectCheck(obj: any) {
+  isObject(obj: any) {
     return typeof obj === "object" && obj !== null;
   }
 

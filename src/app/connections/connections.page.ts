@@ -1,6 +1,7 @@
 import { KeyValue } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 import { AlertController, ModalController } from "@ionic/angular";
+import { Connection } from "../models/connection.model";
 import { ApiHandlerService } from "../services/api-handler.service";
 
 @Component({
@@ -9,7 +10,7 @@ import { ApiHandlerService } from "../services/api-handler.service";
   styleUrls: ["./connections.page.scss"],
 })
 export class ConnectionsPage implements OnInit {
-  @Input() connection: any;
+  @Input() connection: Connection;
 
   constructor(
     private modalCtrl: ModalController,

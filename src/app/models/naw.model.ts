@@ -3,7 +3,7 @@ export interface Naw {
   voorletters: string;
   achternaam: string;
   geslacht: Geslacht;
-  geboortedatum: any;
+  geboortedatum: string | Date;
   bsn: number;
   geldigheid_id: string;
   burgerlijke_staat: BurgerlijkeStaat;

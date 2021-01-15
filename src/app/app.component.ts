@@ -15,7 +15,7 @@ const { StatusBar } = Plugins;
   styleUrls: ["app.component.scss"],
 })
 export class AppComponent {
-  rootPage: any = OnboardingPage;
+  rootPage = OnboardingPage;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,

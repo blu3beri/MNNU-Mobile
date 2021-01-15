@@ -50,4 +50,16 @@ export interface Proof {
       unrevealed_attrs: {};
     };
   };
+  presentation_exchange_id: string;
+  presentation_request: {
+    name: string;
+    nonce: string;
+    requested_attributes: {};
+    requested_predicated: {};
+  };
+  role: string;
+  state: string;
+  thread_id: string;
+  trace: boolean;
+  updated_at: string;
 }

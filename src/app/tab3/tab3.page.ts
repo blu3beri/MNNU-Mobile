@@ -3,6 +3,8 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
 import { AlertController, ModalController } from "@ionic/angular";
 import { environment } from "src/environments/environment";
 import { ConnectionsPage } from "../connections/connections.page";
+import { Connection } from "../models/connection.model";
+import { Invitation } from "../models/invite.model";
 import { Proof } from "../models/proof.model";
 import { ApiHandlerService } from "../services/api-handler.service";
 
@@ -12,8 +14,8 @@ import { ApiHandlerService } from "../services/api-handler.service";
   styleUrls: ["tab3.page.scss"],
 })
 export class Tab3Page implements OnInit {
-  activeConnections = [];
-  invite: any;
+  activeConnections: Connection[];
+  invite: Invitation;
   proofs: Proof[];
 
   constructor(
@@ -37,7 +39,7 @@ export class Tab3Page implements OnInit {
   async getConnections() {
     const connections = await this.apiHandler.getConnections();
     this.activeConnections = connections.filter(
-      (connection: any) =>
+      (connection: Connection) =>
         connection.state === "active" &&
         connection.their_label !== environment.userName
     );
@@ -102,7 +104,7 @@ export class Tab3Page implements OnInit {
     await alert.present();
   }
 
-  async openModal(connection: any) {
+  async openModal(connection: Connection) {
     const modal = await this.modalController.create({
       component: ConnectionsPage,
       componentProps: { connection },
