@@ -1,4 +1,7 @@
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="header">
     <h1 class="header-title">Connecties</h1>
     <ion-button fill="none" (click)="scan()">
@@ -16,13 +19,19 @@
     </ion-button>
   </ion-text>
   <ion-list lines="none" *ngIf="activeConnections.length > 0">
-    <ion-item-sliding
-      *ngFor="let connection of activeConnections"
-      (click)="showConnection(connection)"
-    >
+    <ion-item-sliding *ngFor="let connection of activeConnections">
       <ion-item (click)="openModal(connection)" *ngIf="connection.proof">
         <ion-label>{{connection.their_label}}</ion-label>
-        <ion-icon name="alert-circle-outline" color="danger"></ion-icon>
+        <ion-icon
+          name="alert-circle-outline"
+          color="danger"
+          *ngIf="connection.proof.state === 'request_received'"
+        ></ion-icon>
+        <ion-icon
+          name="mail-outline"
+          color="success"
+          *ngIf="connection.proof.state === 'presentation_sent'"
+        ></ion-icon>
       </ion-item>
       <ion-item *ngIf="!connection.proof">
         <ion-label>{{connection.their_label}}</ion-label>

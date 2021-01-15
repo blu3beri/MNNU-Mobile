@@ -24,7 +24,13 @@ export class Tab3Page implements OnInit {
 
   ngOnInit() {
     this.getConnections();
-    this.getProofRequests();
+  }
+
+  async refresh(e) {
+    this.getConnections();
+
+    await new Promise((r) => setTimeout(r, 2000));
+    e.target.complete();
   }
 
   async getConnections() {
@@ -34,14 +40,10 @@ export class Tab3Page implements OnInit {
         connection.state === "active" &&
         connection.their_label !== environment.userName
     );
+    this.getProofRequests();
   }
 
-  showConnection(connection) {}
-
   async getProofRequests() {
-    // this.proofs = await this.apiHandler.getPresentProofRecordsByState(
-    //   "request_received"
-    // );
     this.proofs = await this.apiHandler.getPresentProofRecords();
     if (this.proofs && this.proofs.length > 0) {
       this.connectProofs();
@@ -55,7 +57,6 @@ export class Tab3Page implements OnInit {
           (proof) => proof.connection_id === connection.connection_id
         ) || undefined;
     });
-    console.log(this.activeConnections);
   }
 
   async removeConnection(connection) {
@@ -105,7 +106,7 @@ export class Tab3Page implements OnInit {
       componentProps: { connection },
     });
     modal.onDidDismiss().then((data) => {
-      console.log(data);
+      this.getConnections();
     });
     return await modal.present();
   }

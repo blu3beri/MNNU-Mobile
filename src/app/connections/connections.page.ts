@@ -89,6 +89,7 @@ export class ConnectionsPage implements OnInit {
       this.connection.proof.presentation_exchange_id,
       requestedAttributes
     );
+    this.modalCtrl.dismiss();
   }
 
   async denyProofRequest() {
@@ -119,5 +120,6 @@ export class ConnectionsPage implements OnInit {
     await this.apiHandler.deletePresentationProof(
       this.connection.proof.presentation_exchange_id
     );
+    this.modalCtrl.dismiss();
   }
 }

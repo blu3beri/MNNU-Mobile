@@ -18,7 +18,10 @@
       <p>{{item.key.replace("_", " ")}}</p>
     </ion-item>
   </ion-list>
-  <div class="button-wrapper">
+  <div
+    class="button-wrapper"
+    *ngIf="connection.proof.state === 'request_received'"
+  >
     <ion-button fill="none" (click)="denyProofRequest()"> Weiger! </ion-button>
     <ion-button fill="none" (click)="acceptProofRequest()">
       Accepteer!

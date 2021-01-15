@@ -14,15 +14,23 @@
         <ion-item *ngFor="let item of naw | keyvalue: originalOrder">
           <ion-grid *ngIf="!isObject(item.value) || isDate(item.value)">
             <ion-row>
-              <ion-col><p>{{item.key.replace('_', ' ')}}</p></ion-col>
-              <ion-col *ngIf="(item.value !== true && item.value !== false) && !isDate(item.value)">
+              <ion-col
+                ><p>{{item.key.replace('_', ' ') | capitalize}}</p></ion-col
+              >
+              <ion-col
+                *ngIf="(item.value !== true && item.value !== false) && !isDate(item.value)"
+              >
                 <p style="text-align: right">{{item.value}}</p>
               </ion-col>
               <ion-col *ngIf="item.value === true || item.value === false">
                 <p style="text-align: right">{{item.value ? 'Ja' : 'Nee'}}</p>
               </ion-col>
-              <ion-col *ngIf="(item.value !== true && item.value !== false) && isDate(item.value)">
-                <p style="text-align: right">{{item.value | date: 'dd MM yyyy'}}</p>
+              <ion-col
+                *ngIf="(item.value !== true && item.value !== false) && isDate(item.value)"
+              >
+                <p style="text-align: right">
+                  {{item.value | date: 'dd MM yyyy'}}
+                </p>
               </ion-col>
             </ion-row>
           </ion-grid>
