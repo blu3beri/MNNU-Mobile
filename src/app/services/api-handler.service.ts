@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { map } from "rxjs/operators";
 import { Credential } from "../models/apiResponse.model";
+import { Proof } from "../models/proof.model";
 
 @Injectable({
   providedIn: "root",
@@ -100,7 +101,7 @@ export class ApiHandlerService {
       .toPromise();
   }
 
-  getPresentProofRecords(): Promise<[]> {
+  getPresentProofRecords(): Promise<Proof[]> {
     const options = {
       params: {},
     };
@@ -110,7 +111,7 @@ export class ApiHandlerService {
       .toPromise();
   }
 
-  getPresentProofRecordsByState(state: string): Promise<[]> {
+  getPresentProofRecordsByState(state: string): Promise<Proof[]> {
     const options = {
       params: {
         state,

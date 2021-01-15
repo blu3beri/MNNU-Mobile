@@ -3,6 +3,7 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
 import { AlertController, ModalController } from "@ionic/angular";
 import { environment } from "src/environments/environment";
 import { ConnectionsPage } from "../connections/connections.page";
+import { Proof } from "../models/proof.model";
 import { ApiHandlerService } from "../services/api-handler.service";
 
 @Component({
@@ -13,7 +14,7 @@ import { ApiHandlerService } from "../services/api-handler.service";
 export class Tab3Page implements OnInit {
   activeConnections = [];
   invite: any;
-  proofs: any[];
+  proofs: Proof[];
 
   constructor(
     private alertController: AlertController,
@@ -57,6 +58,7 @@ export class Tab3Page implements OnInit {
           (proof) => proof.connection_id === connection.connection_id
         ) || undefined;
     });
+    console.log(this.activeConnections);
   }
 
   async removeConnection(connection) {
