@@ -1,7 +1,27 @@
 <ion-content>
-  <div class="header-wrapper">
+  <div class="cancel-wrapper">
     <ion-button (click)="dismiss()" fill="none"
-      ><ion-label color="primary">Cancel</ion-label></ion-button
+      ><ion-label color="primary">Cancel</ion-label>
+    </ion-button>
+  </div>
+  <div class="header-wrapper">
+    {{connection.their_label}}
+    <ion-button fill="none" (click)="help()">
+      <ion-icon name="help-circle-outline"></ion-icon>
+    </ion-button>
+  </div>
+  <ion-list style="margin-left: 20px">
+    <ion-item
+      *ngFor="let item of connection.proof.presentation_request.requested_attributes | keyvalue:originalOrder"
+      lines="none"
     >
+      <p>{{item.key.replace("_", " ")}}</p>
+    </ion-item>
+  </ion-list>
+  <div class="button-wrapper">
+    <ion-button fill="none" (click)="denyProofRequest()"> Weiger! </ion-button>
+    <ion-button fill="none" (click)="acceptProofRequest()">
+      Accepteer!
+    </ion-button>
   </div>
 </ion-content>

@@ -38,7 +38,7 @@ export class AppComponent {
       if (result && result.didOnboarding) {
         // GOTO LOGIN IF U NEED PINCODE OR NO QRCODE IS SCANNED (STORE IN STORAGE IF IT HAS BEEN SCANNED)
         // this.router.navigateByUrl("login");
-        this.router.navigateByUrl("tabs/tab1");
+        this.router.navigateByUrl("tabs/tab3");
       } else {
         this.router.navigateByUrl("onboarding");
       }

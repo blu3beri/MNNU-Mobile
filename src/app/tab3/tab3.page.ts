@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner/ngx";
-import { AlertController, IonItemSliding, ModalController } from "@ionic/angular";
+import { AlertController, ModalController } from "@ionic/angular";
 import { environment } from "src/environments/environment";
 import { ConnectionsPage } from "../connections/connections.page";
 import { ApiHandlerService } from "../services/api-handler.service";
@@ -13,6 +13,7 @@ import { ApiHandlerService } from "../services/api-handler.service";
 export class Tab3Page implements OnInit {
   activeConnections = [];
   invite: any;
+  proofs: any[];
 
   constructor(
     private alertController: AlertController,
@@ -23,16 +24,39 @@ export class Tab3Page implements OnInit {
 
   ngOnInit() {
     this.getConnections();
+    this.getProofRequests();
   }
 
   async getConnections() {
     const connections = await this.apiHandler.getConnections();
     this.activeConnections = connections.filter(
-      (connection: any) => connection.state === "active" && connection.their_label !== environment.userName
+      (connection: any) =>
+        connection.state === "active" &&
+        connection.their_label !== environment.userName
     );
   }
 
   showConnection(connection) {}
+
+  async getProofRequests() {
+    // this.proofs = await this.apiHandler.getPresentProofRecordsByState(
+    //   "request_received"
+    // );
+    this.proofs = await this.apiHandler.getPresentProofRecords();
+    if (this.proofs && this.proofs.length > 0) {
+      this.connectProofs();
+    }
+  }
+
+  connectProofs() {
+    this.activeConnections.forEach((connection) => {
+      connection.proof =
+        this.proofs.find(
+          (proof) => proof.connection_id === connection.connection_id
+        ) || undefined;
+    });
+    console.log(this.activeConnections);
+  }
 
   async removeConnection(connection) {
     console.log(connection);
@@ -49,9 +73,14 @@ export class Tab3Page implements OnInit {
         {
           text: "OK",
           handler: () => {
-            this.apiHandler.deleteConnection(connection.connection_id).then((_) => {
-              this.activeConnections.splice(this.activeConnections.indexOf(connection), 1);
-            });
+            this.apiHandler
+              .deleteConnection(connection.connection_id)
+              .then((_) => {
+                this.activeConnections.splice(
+                  this.activeConnections.indexOf(connection),
+                  1
+                );
+              });
           },
         },
       ],
@@ -73,7 +102,7 @@ export class Tab3Page implements OnInit {
   async openModal(connection: any) {
     const modal = await this.modalController.create({
       component: ConnectionsPage,
-      componentProps: connection,
+      componentProps: { connection },
     });
     modal.onDidDismiss().then((data) => {
       console.log(data);
@@ -83,7 +112,10 @@ export class Tab3Page implements OnInit {
 
   scan() {
     this.barcodeScanner
-      .scan({ disableSuccessBeep: true, prompt: "Scan de qrcode die u heeft ontvangen" })
+      .scan({
+        disableSuccessBeep: true,
+        prompt: "Scan de qrcode die u heeft ontvangen",
+      })
       .then(async (barcodeData) => {
         const invite = JSON.parse(atob(barcodeData.text));
         invite.label = invite.label.replace("_", " ");

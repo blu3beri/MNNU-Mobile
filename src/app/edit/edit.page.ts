@@ -61,7 +61,6 @@ export class EditPage {
     for (const [key, value] of Object.entries(this.newNaw)) {
       const foundItem = copyNaw.find((item) => item === key);
       if (foundItem) {
-        // this.attributes.push({ [key]: value });
         this.attributes.push({ name: key, value });
       } else if (key === "adres") {
         for (const [akey, avalue] of Object.entries(value)) {
@@ -142,6 +141,7 @@ export class EditPage {
   }
 
   async sendCredential(credDefId: string, schema: any, connectionId: string, attributes: {}[]) {
+    console.log(attributes);
     this.apiHandler.postCredential(credDefId, schema, connectionId, attributes, "yay").then(() => {
       this.loading = false;
       this.modalCtrl.dismiss({ naw: this.newNaw });

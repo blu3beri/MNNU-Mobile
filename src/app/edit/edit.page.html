@@ -5,7 +5,7 @@
   <div class="form">
     <ion-list lines="none">
       <div *ngFor="let item of newNaw |  keyvalue:originalOrder">
-        <ion-item class="item-wrapper" *ngIf="!isObject(item.value)">
+        <ion-item class="item-wrapper" *ngIf="!isObject(item.value) || isDate(item.value)">
           <ion-label><b>{{item.key.replace("_", " ")}}</b></ion-label>
           <ion-input
             [ngModel]="item?.value"
@@ -44,7 +44,7 @@
             <ion-select-option value="weduwstaat">weduwestaat</ion-select-option>
           </ion-select>
         </ion-item>
-        <ion-item class="item-wrapper col" *ngIf="isObject(item.value)">
+        <ion-item class="item-wrapper col" *ngIf="isObject(item.value) && !isDate(item.value)">
           <!-- <ion-label>{{item.key}}</ion-label> -->
           <ion-list style="width: 100%" lines="none">
             <h2>{{item.key}}</h2>

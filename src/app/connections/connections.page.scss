@@ -1,18 +1,36 @@
-.header-wrapper {
+.cancel-wrapper {
   margin: 20px 0 0 10px;
 }
 
-ion-input {
-  text-align: right;
+.header-wrapper {
+  font-weight: bold;
+  font-size: 22px;
+  margin: 35px;
+  display: flex;
+  justify-content: space-between;
+
+  ion-button {
+    position: relative;
+    bottom: 8px;
+  }
 }
 
 .button-wrapper {
+  position: sticky;
+  bottom: 0;
+  right: 0;
   width: 100%;
+  justify-content: space-evenly;
   display: flex;
-  justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  background: white;
+  height: 70px;
+  box-shadow: 0px 6px 29px 0px rgba(0, 0, 0, 0.26);
 }
 
-ion-datetime {
-  --placeholder-color: black;
+.reden-wrapper {
+  margin-left: 50px;
+  p {
+    font-size: 18px;
+  }
 }
