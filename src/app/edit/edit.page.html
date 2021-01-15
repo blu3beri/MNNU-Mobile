@@ -1,11 +1,16 @@
 <ion-content>
   <div class="header-wrapper">
-    <ion-button (click)="dismiss()" fill="none"><ion-label color="primary">Cancel</ion-label></ion-button>
+    <ion-button (click)="dismiss()" fill="none"
+      ><ion-label color="primary">Cancel</ion-label></ion-button
+    >
   </div>
   <div class="form">
     <ion-list lines="none">
       <div *ngFor="let item of newNaw |  keyvalue:originalOrder">
-        <ion-item class="item-wrapper" *ngIf="!isObject(item.value) || isDate(item.value)">
+        <ion-item
+          class="item-wrapper"
+          *ngIf="!isObject(item.value) || isDate(item.value)"
+        >
           <ion-label><b>{{item.key.replace("_", " ")}}</b></ion-label>
           <ion-input
             [ngModel]="item?.value"
@@ -18,7 +23,11 @@
             [ngModel]="item.value"
             *ngIf="item.key === 'geboortedatum'"
           ></ion-datetime>
-          <ion-select [ngModel]="item.value" (ionChange)="change(item.key, $event)" *ngIf="item.key === 'geslacht'">
+          <ion-select
+            [ngModel]="item.value"
+            (ionChange)="change(item.key, $event)"
+            *ngIf="item.key === 'geslacht'"
+          >
             <ion-select-option value="man">man</ion-select-option>
             <ion-select-option value="vrouw">vrouw</ion-select-option>
             <ion-select-option value="onzijdig">onzijdig</ion-select-option>
@@ -37,18 +46,29 @@
             *ngIf="item.key === 'burgerlijke_staat'"
           >
             <ion-select-option value="ongehuwd">ongehuwd</ion-select-option>
-            <ion-select-option value="samenwonend">samenwonend</ion-select-option>
-            <ion-select-option value="wettelijkesamenwoning">wettelijkesamenwoning</ion-select-option>
+            <ion-select-option value="samenwonend"
+              >samenwonend</ion-select-option
+            >
+            <ion-select-option value="wettelijkesamenwoning"
+              >wettelijkesamenwoning</ion-select-option
+            >
             <ion-select-option value="gehuwd">gehuwd</ion-select-option>
             <ion-select-option value="gescheiden">gescheiden</ion-select-option>
-            <ion-select-option value="weduwstaat">weduwestaat</ion-select-option>
+            <ion-select-option value="weduwstaat"
+              >weduwestaat</ion-select-option
+            >
           </ion-select>
         </ion-item>
-        <ion-item class="item-wrapper col" *ngIf="isObject(item.value) && !isDate(item.value)">
-          <!-- <ion-label>{{item.key}}</ion-label> -->
+        <ion-item
+          class="item-wrapper col"
+          *ngIf="isObject(item.value) && !isDate(item.value)"
+        >
           <ion-list style="width: 100%" lines="none">
             <h2>{{item.key}}</h2>
-            <ion-item *ngFor="let subitem of item.value | keyvalue:originalOrder" style="width: 100%">
+            <ion-item
+              *ngFor="let subitem of item.value | keyvalue:originalOrder"
+              style="width: 100%"
+            >
               <ion-label>{{subitem.key}}</ion-label>
               <ion-input
                 [ngModel]="subitem?.value"
@@ -64,5 +84,3 @@
     <ion-button (click)="save()">Opslaan!</ion-button>
   </div>
 </ion-content>
-
-<!-- item?.value ? item.value = $event : null -->

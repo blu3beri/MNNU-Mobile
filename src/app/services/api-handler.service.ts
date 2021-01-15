@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { map } from "rxjs/operators";
-import { Observable } from "rxjs";
 import { Credential } from "../models/apiResponse.model";
 
 @Injectable({
@@ -101,25 +100,6 @@ export class ApiHandlerService {
       .toPromise();
   }
 
-  postReceiveInvitation(
-    invitation: {},
-    autoAccept = "true",
-    alias: string
-  ): Promise<any> {
-    console.log(invitation);
-
-    return this.http
-      .post(
-        this.apiUrl + this.endPoints.connections.receiveInvitation,
-        invitation,
-        {
-          params: { alias, auto_accept: autoAccept },
-        }
-      )
-      .pipe(map((res: any) => res))
-      .toPromise();
-  }
-
   getPresentProofRecords(): Promise<[]> {
     const options = {
       params: {},
@@ -163,6 +143,25 @@ export class ApiHandlerService {
     return this.http
       .get(this.apiUrl + this.endPoints.schema.created, options)
       .pipe(map((res: any) => res.schema_ids[0]))
+      .toPromise();
+  }
+
+  postReceiveInvitation(
+    invitation: {},
+    autoAccept = "true",
+    alias: string
+  ): Promise<any> {
+    console.log(invitation);
+
+    return this.http
+      .post(
+        this.apiUrl + this.endPoints.connections.receiveInvitation,
+        invitation,
+        {
+          params: { alias, auto_accept: autoAccept },
+        }
+      )
+      .pipe(map((res: any) => res))
       .toPromise();
   }
 

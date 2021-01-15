@@ -63,50 +63,6 @@ export class Tab1Page {
     return typeof date.getMonth === "function";
   }
 
-  // DEMO
-
-  // async createSelfConnenction() {
-  //   const createInvitation = await this.apiHandler.postCreateInvitation(
-  //     "SELF_CONNECTION_CREATE",
-  //     "true",
-  //     "false",
-  //     "false"
-  //   );
-  //   const receiveInvitation = await this.apiHandler.postReceiveInvitation(
-  //     createInvitation.invitation,
-  //     "true",
-  //     "SELF_CONNECTION_RECEIVE"
-  //   );
-  //   await new Promise((r) => setTimeout(r, 5000));
-  //   this.createSchemaAndDefinition(receiveInvitation);
-  // }
-
-  // async createSchemaAndDefinition(receiveInvitation: any) {
-  //   const connection = await this.apiHandler.getConnectionById(receiveInvitation.connection_id);
-  //   console.log(`connection id: ${connection.connection_id} is in state: ${connection.state}`);
-
-  //   const schema = await this.apiHandler.postSchema(naw);
-  //   console.log(`schema id: ${schema.schema_id}`);
-
-  //   const credentialDefinition = await this.apiHandler.postCredentialDefinition(schema);
-  //   console.log(`credential definition id: ${credentialDefinition.credential_definition_id}`);
-
-  //   await new Promise((r) => setTimeout(r, 5000));
-  //   const attributes = [];
-
-  //   naw.attributes.forEach((attribute, index) => {
-  //     attributes.push({ name: attribute, value: index.toString() });
-  //   });
-
-  //   this.sendCredential(credentialDefinition.credential_definition_id, schema, connection.connection_id, attributes);
-  // }
-
-  // async sendCredential(credDefId, schema, connectionId, attributes) {
-  //   await this.apiHandler.postCredential(credDefId, schema, connectionId, attributes, "yay");
-  //   await new Promise((r) => setTimeout(r, 5000));
-  //   this.getNawCredential();
-  // }
-
   async getNawCredential() {
     const credential = await this.apiHandler.getCredentialByName("naw");
     if (credential && credential.attrs) {
