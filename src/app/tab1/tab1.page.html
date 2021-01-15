@@ -6,9 +6,6 @@
     <div class="naw-data">
       <ion-text color="primary" class="title-wrapper">
         <h2>Uw gegevens</h2>
-        <!-- <ion-button fill="none" (click)="openModal()">
-          <ion-icon name="create"></ion-icon>
-        </ion-button> -->
       </ion-text>
       <ion-list lines="none">
         <ion-item *ngFor="let item of naw | keyvalue: originalOrder">
@@ -53,19 +50,3 @@
     <ion-button (click)="openModal(true)">Maak aan!</ion-button>
   </div>
 </ion-content>
-
-<!-- <mat-accordion *ngIf="isObject(item.value)" [displayMode]="flat">
-  <mat-expansion-panel class="mat-elevation-z0">
-    <mat-expansion-panel-header style="background-color: white; border-radius: 0; box-shadow: none">
-      <mat-panel-title style="color: black">{{item.key}}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <ion-item *ngFor="let n of item.value | keyvalue" class="no-padding" lines="none">
-      <ion-grid>
-        <ion-row>
-          <ion-col><b>{{n.key.replaceAll('_', ' ') | capitalize}}</b></ion-col>
-          <ion-col style="text-align: right">{{n.value | capitalize}}</ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-item>
-  </mat-expansion-panel>
-</mat-accordion> -->

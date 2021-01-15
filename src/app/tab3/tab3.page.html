@@ -20,7 +20,10 @@
   </ion-text>
   <ion-list lines="none" *ngIf="activeConnections.length > 0">
     <ion-item-sliding *ngFor="let connection of activeConnections">
-      <ion-item (click)="openModal(connection)" *ngIf="connection.proof">
+      <ion-item
+        (click)="openModal(connection)"
+        *ngIf="connection.proof && (connection.proof.state === 'request_received' || connection.proof.state === 'presentation_sent')"
+      >
         <ion-label>{{connection.their_label}}</ion-label>
         <ion-icon
           name="alert-circle-outline"
@@ -33,7 +36,9 @@
           *ngIf="connection.proof.state === 'presentation_sent'"
         ></ion-icon>
       </ion-item>
-      <ion-item *ngIf="!connection.proof">
+      <ion-item
+        *ngIf="!connection.proof || (connection.proof.state !== 'request_received' && connection.proof.state !== 'presentation_sent')"
+      >
         <ion-label>{{connection.their_label}}</ion-label>
       </ion-item>
       <ion-item-options
