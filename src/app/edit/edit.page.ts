@@ -1,6 +1,6 @@
 import { KeyValue } from "@angular/common";
 import { Component, Input } from "@angular/core";
-import { ModalController } from "@ionic/angular";
+import { LoadingController, ModalController } from "@ionic/angular";
 import { Naw } from "../models/naw.model";
 import { naw } from "../models/naw.schema";
 import { ApiHandlerService } from "../services/api-handler.service";
@@ -13,13 +13,13 @@ import { NotificationService } from "../services/notification.service";
 })
 export class EditPage {
   @Input() newNaw: Naw;
-  loading = false;
   attributes: { name: string; value: any }[];
 
   constructor(
     private modalCtrl: ModalController,
     private notifications: NotificationService,
-    private apiHandler: ApiHandlerService
+    private apiHandler: ApiHandlerService,
+    private loadingController: LoadingController
   ) {}
 
   isObject(val: any): boolean {
@@ -51,6 +51,7 @@ export class EditPage {
   }
 
   save() {
+    this.presentLoading();
     this.parseNawBack();
     this.createCredential();
   }
@@ -87,7 +88,6 @@ export class EditPage {
   }
 
   createCredential() {
-    this.loading = true;
     this.createSelfConnenction();
   }
 
@@ -143,9 +143,16 @@ export class EditPage {
   async sendCredential(credDefId: string, schema: any, connectionId: string, attributes: {}[]) {
     console.log(attributes);
     this.apiHandler.postCredential(credDefId, schema, connectionId, attributes, "yay").then(() => {
-      this.loading = false;
+      this.loadingController.dismiss();
       this.modalCtrl.dismiss({ naw: this.newNaw });
       this.notifications.notify("De veranderingen zijn doorgevoerd!");
     });
+  }
+
+  async presentLoading() {
+    const loading = await this.loadingController.create({
+      message: "Uw gegevens worden aangemaakt...",
+    });
+    await loading.present();
   }
 }

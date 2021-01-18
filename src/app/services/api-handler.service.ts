@@ -38,12 +38,7 @@ export class ApiHandlerService {
 
   constructor(private http: HttpClient) {}
 
-  postCreateInvitation(
-    alias: string,
-    autoAccept = "false",
-    multiUse = "false",
-    pub = "false"
-  ) {
+  postCreateInvitation(alias: string, autoAccept = "false", multiUse = "false", pub = "false"): Promise<any> {
     const options = {
       params: {
         alias,
@@ -53,13 +48,7 @@ export class ApiHandlerService {
       },
     };
 
-    return this.http
-      .post(
-        this.apiUrl + this.endPoints.connections.createInvitation,
-        {},
-        options
-      )
-      .toPromise();
+    return this.http.post(this.apiUrl + this.endPoints.connections.createInvitation, {}, options).toPromise();
   }
 
   getConnections(): Promise<Connection[]> {
@@ -71,12 +60,7 @@ export class ApiHandlerService {
 
   getConnectionById(connectionId: string): Promise<Connection> {
     return this.http
-      .get(
-        this.apiUrl +
-          this.endPoints.connections.connections +
-          "/" +
-          connectionId
-      )
+      .get(this.apiUrl + this.endPoints.connections.connections + "/" + connectionId)
       .pipe(map((res: Connection) => res))
       .toPromise();
   }
@@ -91,13 +75,7 @@ export class ApiHandlerService {
   getCredentialByName(name: string): Promise<Credential> {
     return this.http
       .get(this.apiUrl + this.endPoints.credentials)
-      .pipe(
-        map((res: any) =>
-          res.results.find(
-            (item: Credential) => item.cred_def_id.split(":")[4] === name
-          )
-        )
-      )
+      .pipe(map((res: any) => res.results.find((item: Credential) => item.cred_def_id.split(":")[4] === name)))
       .toPromise();
   }
 
@@ -147,31 +125,16 @@ export class ApiHandlerService {
       .toPromise();
   }
 
-  postReceiveInvitation(
-    invitation: {},
-    autoAccept = "true",
-    alias: string
-  ): Promise<any> {
-    console.log(invitation);
-
+  postReceiveInvitation(invitation: any, autoAccept = "true", alias: string): Promise<any> {
     return this.http
-      .post(
-        this.apiUrl + this.endPoints.connections.receiveInvitation,
-        invitation,
-        {
-          params: { alias, auto_accept: autoAccept },
-        }
-      )
+      .post(this.apiUrl + this.endPoints.connections.receiveInvitation, invitation, {
+        params: { alias, auto_accept: autoAccept },
+      })
       .pipe(map((res: any) => res))
       .toPromise();
   }
 
-  postPresentation(
-    requestedAttributes = {},
-    requestedPredicates = {},
-    selfAttestedAttributes = {},
-    trace = false
-  ) {
+  postPresentation(requestedAttributes = {}, requestedPredicates = {}, selfAttestedAttributes = {}, trace = false) {
     const presentation = {
       requested_attributes: requestedAttributes,
       requested_predicated: requestedPredicates,
@@ -184,9 +147,7 @@ export class ApiHandlerService {
   }
 
   postSchema(schema: {}): Promise<any> {
-    return this.http
-      .post(this.apiUrl + this.endPoints.schema.schemas, schema)
-      .toPromise();
+    return this.http.post(this.apiUrl + this.endPoints.schema.schemas, schema).toPromise();
   }
 
   postCredentialDefinition(schema: any): Promise<any> {
@@ -195,21 +156,10 @@ export class ApiHandlerService {
       tag: schema.schema.name,
     };
 
-    return this.http
-      .post(
-        this.apiUrl + this.endPoints.credentialDefinition.credentialDefinitions,
-        body
-      )
-      .toPromise();
+    return this.http.post(this.apiUrl + this.endPoints.credentialDefinition.credentialDefinitions, body).toPromise();
   }
 
-  postCredential(
-    credentialDefinitionId: string,
-    schema: any,
-    connenctionId: string,
-    attributes: {}[],
-    comment = ""
-  ) {
+  postCredential(credentialDefinitionId: string, schema: any, connenctionId: string, attributes: {}[], comment = "") {
     const did = credentialDefinitionId.split(":")[0];
     const body = {
       connection_id: connenctionId,
@@ -244,33 +194,16 @@ export class ApiHandlerService {
       trace: "false",
     };
     return this.http
-      .post(
-        this.apiUrl +
-          this.endPoints.presentProof.records +
-          `/${pres_ex_id}/` +
-          "send-presentation",
-        body
-      )
+      .post(this.apiUrl + this.endPoints.presentProof.records + `/${pres_ex_id}/` + "send-presentation", body)
       .pipe(map((res: any) => res))
       .toPromise();
   }
 
   deletePresentationProof(pres_ex_id: string) {
-    return this.http
-      .delete(
-        this.apiUrl + this.endPoints.presentProof.records + "/" + pres_ex_id
-      )
-      .toPromise();
+    return this.http.delete(this.apiUrl + this.endPoints.presentProof.records + "/" + pres_ex_id).toPromise();
   }
 
   deleteConnection(connectionId: string) {
-    return this.http
-      .delete(
-        this.apiUrl +
-          this.endPoints.connections.connections +
-          "/" +
-          connectionId
-      )
-      .toPromise();
+    return this.http.delete(this.apiUrl + this.endPoints.connections.connections + "/" + connectionId).toPromise();
   }
 }
