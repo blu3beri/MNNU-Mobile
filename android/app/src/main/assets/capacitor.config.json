@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "MNNU-Mobile",
+  "appId": "HU.Minor.Berend",
+  "appName": "MNNU",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
