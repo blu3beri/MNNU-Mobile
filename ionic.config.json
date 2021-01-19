@@ -1,7 +1,8 @@
 {
-  "name": "MNNU-Mobile",
+  "name": "MNNU",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

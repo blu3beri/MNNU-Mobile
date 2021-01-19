@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "MNNU-Mobile",
+  "appId": "HU.Minor.Berend",
+  "appName": "MNNU",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
@@ -9,5 +9,9 @@
       "launchShowDuration": 0
     }
   },
-  "cordova": {}
+  "cordova": {},
+  "server": {
+    "url": "http://10.254.0.89:8100",
+    "cleartext": true
+  }
 }

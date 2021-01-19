@@ -1,0 +1,65 @@
+<ion-content>
+  <div class="wrapper" *ngIf="epd">
+    <ion-text color="primary" class="title-wrapper">
+      <h2>Uw medische gegevens</h2>
+      <ion-item class="search-bar" lines="none">
+        <ion-input
+          type="text"
+          placeholder="Zoeken..."
+          [(ngModel)]="query"
+          (ngModelChange)="searchEpd()"
+          clearInput="true"
+        >
+        </ion-input>
+      </ion-item>
+    </ion-text>
+    <mat-accordion multi>
+      <mat-expansion-panel
+        *ngFor="let item of epd | keyvalue: originalOrder"
+        class="mat-elevation-z0 no-padding"
+      >
+        <mat-expansion-panel-header
+          style="background-color: white; border-radius: 0"
+        >
+          <mat-panel-title style="color: black">
+            <b>{{item.key.replaceAll('_', ' ') | capitalize}}</b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div *ngIf="isObject(item.value)">
+          <ion-item
+            *ngFor="let n of item.value | keyvalue"
+            class="no-padding"
+            lines="none"
+          >
+            <ion-grid>
+              <ion-row>
+                <ion-col
+                  ><b>{{n.key.replaceAll('_', ' ') | capitalize}}</b></ion-col
+                >
+                <ion-col style="text-align: right"
+                  >{{n.value | capitalize}}</ion-col
+                >
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </div>
+        <div class="mat-expansion-panel-body" *ngIf="!isObject(item.value)">
+          <ion-item class="no-padding" lines="none">
+            <p *ngIf="item.value === true || item.value === false">
+              {{item.value ? 'Ja' : 'Nee'}}
+            </p>
+            <p *ngIf="item.value !== true && item.value !== false">
+              {{item.value | capitalize}}
+            </p>
+          </ion-item>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="wrapper" *ngIf="!epd">
+    <div class="no-content" *ngIf="!epd">
+      <img src="../../assets/no_data.svg" alt="no-data" />
+      <h2>U heeft nog geen medische data</h2>
+    </div>
+  </div>
+</ion-content>

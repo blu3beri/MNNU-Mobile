@@ -1,0 +1,52 @@
+<ion-content>
+  <div class="wrapper" *ngIf="naw">
+    <div class="header">
+      <h1 class="header-title">Hallo, {{naw.naam}}</h1>
+    </div>
+    <div class="naw-data">
+      <ion-text color="primary" class="title-wrapper">
+        <h2>Uw gegevens</h2>
+      </ion-text>
+      <ion-list lines="none">
+        <ion-item *ngFor="let item of naw | keyvalue: originalOrder">
+          <ion-grid *ngIf="!isObject(item.value) || isDate(item.value)">
+            <ion-row>
+              <ion-col
+                ><p>{{item.key.replace('_', ' ') | capitalize}}</p></ion-col
+              >
+              <ion-col
+                *ngIf="(item.value !== true && item.value !== false) && !isDate(item.value)"
+              >
+                <p style="text-align: right">{{item.value}}</p>
+              </ion-col>
+              <ion-col *ngIf="item.value === true || item.value === false">
+                <p style="text-align: right">{{item.value ? 'Ja' : 'Nee'}}</p>
+              </ion-col>
+              <ion-col
+                *ngIf="(item.value !== true && item.value !== false) && isDate(item.value)"
+              >
+                <p style="text-align: right">
+                  {{item.value | date: 'dd MM yyyy'}}
+                </p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid *ngIf="isObject(item.value) && !isDate(item.value)">
+            <ion-row>
+              <ion-col class="padding: 10px"><b>{{item.key}}</b></ion-col>
+            </ion-row>
+            <ion-row *ngFor="let sub of item.value | keyvalue: originalOrder">
+              <ion-col style="padding: 10px"><p>{{sub.key}}</p></ion-col>
+              <p style="text-align: right">{{sub.value}}</p>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+  <div class="no-content" *ngIf="!naw">
+    <img src="../../assets/personal.svg" alt="no-data" />
+    <h2>U heeft nog geen gegevens</h2>
+    <ion-button (click)="openModal(true)">Maak aan!</ion-button>
+  </div>
+</ion-content>
